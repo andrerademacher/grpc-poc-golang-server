@@ -1,0 +1,28 @@
+// For spec, see https://aka.ms/devcontainer.json
+{
+  "name": "grpc-poc-golang-server",
+  "dockerComposeFile": [
+    "../compose.yaml"
+  ],
+  "service": "golang-server",
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        // golang
+        "golang.go",
+
+        // markdown
+        "bierner.emojisense",
+        "davidanson.vscode-markdownlint",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/home/vscode/grpc-poc-golang-server,type=bind=consistency=cached"
+  ],
+  "remoteUser": "vscode",
+  "shutdownAction": "stopCompose",
+  "workspaceFolder": "/home/vscode/grpc-poc-golang-server",
+}
