@@ -15,7 +15,10 @@
         // markdown
         "bierner.emojisense",
         "davidanson.vscode-markdownlint",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+
+        // protobuf
+        "tooltitudeteam.tooltitude-pb"
       ]
     }
   },
@@ -24,5 +27,5 @@
   ],
   "remoteUser": "vscode",
   "shutdownAction": "stopCompose",
-  "workspaceFolder": "/home/vscode/grpc-poc-golang-server",
+  "workspaceFolder": "/home/vscode/grpc-poc-golang-server"
 }

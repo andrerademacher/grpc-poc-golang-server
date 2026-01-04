@@ -1,0 +1,18 @@
+// Protobuf language guide v3: https://protobuf.dev/programming-guides/proto3/
+syntax = "proto3";
+
+package hello;
+
+option go_package = "./hello";
+
+service HelloService {
+    rpc SayHello (HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string message = 1;
+}

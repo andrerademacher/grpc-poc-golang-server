@@ -16,10 +16,13 @@ RUN apt-get update && \
     apt-get install --yes \
         git \
         mc \
+        protobuf-compiler \
         sudo \
         && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
+
+COPY --from=fullstorydev/grpcurl /bin/grpcurl /bin/grpcurl
 
 # setup user
 RUN echo "creating user ${USERNAME} with uid=${USER_UID} and gid=${USER_GID}" && \
@@ -47,8 +50,10 @@ RUN mkdir \
     /home/${USERNAME}/.cache/go-build \
     ${PROJECT_DIR}
 
+# install go tools
+RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
 # use golang build cache
 VOLUME /go/pkg
 VOLUME /home/${USERNAME}/.cache/go-build
-
-
