@@ -11,6 +11,7 @@ package hello
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -70,6 +71,7 @@ func (x *HelloRequest) GetName() string {
 type HelloResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -111,15 +113,23 @@ func (x *HelloResponse) GetMessage() string {
 	return ""
 }
 
+func (x *HelloResponse) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
 var File_hello_proto protoreflect.FileDescriptor
 
 const file_hello_proto_rawDesc = "" +
 	"\n" +
-	"\vhello.proto\x12\x05hello\"\"\n" +
+	"\vhello.proto\x12\x05hello\x1a\x1fgoogle/protobuf/timestamp.proto\"\"\n" +
 	"\fHelloRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"c\n" +
 	"\rHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2E\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x128\n" +
+	"\ttimestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp2E\n" +
 	"\fHelloService\x125\n" +
 	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponseB\tZ\a./hellob\x06proto3"
 
@@ -137,17 +147,19 @@ func file_hello_proto_rawDescGZIP() []byte {
 
 var file_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_hello_proto_goTypes = []any{
-	(*HelloRequest)(nil),  // 0: hello.HelloRequest
-	(*HelloResponse)(nil), // 1: hello.HelloResponse
+	(*HelloRequest)(nil),          // 0: hello.HelloRequest
+	(*HelloResponse)(nil),         // 1: hello.HelloResponse
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_hello_proto_depIdxs = []int32{
-	0, // 0: hello.HelloService.SayHello:input_type -> hello.HelloRequest
-	1, // 1: hello.HelloService.SayHello:output_type -> hello.HelloResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: hello.HelloResponse.timestamp:type_name -> google.protobuf.Timestamp
+	0, // 1: hello.HelloService.SayHello:input_type -> hello.HelloRequest
+	1, // 2: hello.HelloService.SayHello:output_type -> hello.HelloResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_hello_proto_init() }

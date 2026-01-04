@@ -8,6 +8,7 @@ import (
 	pb "grpc-poc-golang-server/hello"
 
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type server struct {
@@ -18,7 +19,9 @@ func (s *server) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloR
 	name := req.GetName()
 	log.Printf("called by %s", name)
 	message := "Hello, " + name
-	return &pb.HelloResponse{Message: message}, nil
+
+	timestamp := timestamppb.Now()
+	return &pb.HelloResponse{Message: message, Timestamp: timestamp}, nil
 }
 
 func main() {
